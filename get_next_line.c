@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new.c                                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:59:51 by lenakach          #+#    #+#             */
-/*   Updated: 2025/05/19 13:33:47 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:06:48 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*ft_fill(int fd, char *stash)
 	res = 1;
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
-		return (NULL);
+		return (free(buffer), free(stash), stash = NULL, NULL);
 	while (!ft_strchr(stash, '\n') && res > 0)
 	{
 		res = read(fd, buffer, BUFFER_SIZE);
@@ -114,7 +114,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	int		file_fd;
 	char	*line;
@@ -134,4 +134,4 @@ int	main(void)
 	}
 	close(file_fd);
 	return (0);
-}
+}*/

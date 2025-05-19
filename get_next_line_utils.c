@@ -6,11 +6,29 @@
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:58:31 by lenakach          #+#    #+#             */
-/*   Updated: 2025/05/16 19:07:08 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/05/17 14:21:01 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*ft_strchr(const char *s, int c)
+{
+	int	i;
+	int	cc;
+
+	i = 0;
+	cc = (unsigned char)c;
+	while (s[i])
+	{
+		if (s[i] == cc)
+			return ((char *)(&s[i]));
+		i++;
+	}
+	if (s[i] == cc)
+		return ((char *)(&s[i]));
+	return (NULL);
+}
 
 size_t	ft_strlen(const char *s)
 {
@@ -20,18 +38,6 @@ size_t	ft_strlen(const char *s)
 	while (s[i])
 		i++;
 	return (i);
-}
-
-void	ft_putstr(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		write(1, &s[i], 1);
-		i++;
-	}
 }
 
 char	*ft_strcpy(char *dest, const char *src)

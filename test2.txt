@@ -1,0 +1,4 @@
+Fichier 2 : Ligne 1
+Fichier 2 : Ligne 2
+Fichier 2 : Ligne 3
+FIn de fichier 2.

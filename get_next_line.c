@@ -6,7 +6,7 @@
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:59:51 by lenakach          #+#    #+#             */
-/*   Updated: 2025/05/21 13:12:33 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:07:00 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,9 @@ char	*ft_line(char *stash)
 char	*ft_fill(int fd, char *stash)
 {
 	char	*buffer;
+	char	*tmp;
 	int		res;
 
-	if (!stash)
-		return (NULL);
 	res = 1;
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
@@ -79,9 +78,10 @@ char	*ft_fill(int fd, char *stash)
 			return (free(buffer), stash);
 		if (res == 0)
 			return (free(buffer), free(stash), NULL);
-		stash = ft_strjoin(stash, buffer);
+		tmp = stash;
+		stash = ft_strjoin(tmp, buffer);
 		if (!stash)
-			return (free(buffer), NULL);
+			return (free(buffer), free(tmp), NULL);
 	}
 	free(buffer);
 	return (stash);
@@ -96,8 +96,6 @@ char	*get_next_line(int fd)
 		return (free(stash), stash = NULL, NULL);
 	if (!stash)
 		stash = ft_strdup("");
-	if (!stash)
-		return (NULL);
 	stash = ft_fill(fd, stash);
 	if (!stash)
 		return (NULL);
@@ -127,12 +125,6 @@ char	*get_next_line(int fd)
 		printf("%s", line);
 		free(line);
 		line = get_next_line(file_fd);
-		// if (line == NULL)
-		// {
-		// 	printf("%s", line);
-		// 	free(line);
-		// 	line = get_next_line(file_fd);
-		// }
 	}
 	close(file_fd);
 	return (0);

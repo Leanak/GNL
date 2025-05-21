@@ -6,28 +6,11 @@
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:58:31 by lenakach          #+#    #+#             */
-/*   Updated: 2025/05/19 21:06:17 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:30:32 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	unsigned char	*tmp;
-	size_t			i;
-
-	i = 0;
-	tmp = malloc (nmemb * size);
-	if (!tmp)
-		return (NULL);
-	while (i < nmemb * size)
-	{
-		tmp[i] = 0;
-		i++;
-	}
-	return (tmp);
-}
 
 char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
@@ -40,7 +23,7 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	if (len > ft_strlen(s + start))
 		len = ft_strlen(s + start);
-	str = ft_calloc(len + 1, sizeof(char));
+	str = malloc((len + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	i = 0;
@@ -83,33 +66,27 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strcpy(char *dest, const char *src)
+char	*ft_strdup(const char *s)
 {
-	int	i;
+	char	*dest;
+	size_t	taille;
+	size_t	i;
 
 	i = 0;
-	while (src[i])
+	taille = ft_strlen(s);
+	dest = malloc ((taille + 1) * sizeof(char));
+	if (!dest)
+		return (NULL);
+	while (i < taille)
 	{
-		dest[i] = src[i];
+		dest[i] = s[i];
 		i++;
 	}
 	dest[i] = '\0';
 	return (dest);
 }
 
-char	*ft_strdup(const char *s)
-{
-	char	*dest;
-
-	dest = malloc ((ft_strlen(s) + 1) * sizeof(char));
-	if (!dest)
-		return (NULL);
-	else
-		return (ft_strcpy(dest, s));
-}
-
-
-char	*ft_strjoin(char *s1, const char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*s3;
 	int		i;
@@ -135,5 +112,5 @@ char	*ft_strjoin(char *s1, const char *s2)
 	}
 	s3[j] = '\0';
 	free(s1);
-	return (s1 = 0, s3);
+	return (s3);
 }

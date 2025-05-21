@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 12:59:51 by lenakach          #+#    #+#             */
-/*   Updated: 2025/05/21 13:12:33 by lenakach         ###   ########.fr       */
+/*   Created: 2025/05/20 17:52:57 by lenakach          #+#    #+#             */
+/*   Updated: 2025/05/21 12:48:54 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_clean(char *stash)
 	char	*new;
 
 	i = 0;
-	while (stash[i] != '\0' && stash[i] != '\n')
+	while (stash[i] && stash[i] != '\n')
 		i++;
 	j = i;
 	while (stash[i])
@@ -28,8 +28,8 @@ char	*ft_clean(char *stash)
 		return (stash[0] = 0, stash);
 	new = ft_substr(stash, j + 1, i);
 	if (!new)
-		return (free(stash), NULL);
-	return (free(stash), new);
+		return (free(stash), stash = 0, NULL);
+	return (free(stash), stash = 0, new);
 }
 
 char	*ft_line(char *stash)
@@ -38,9 +38,9 @@ char	*ft_line(char *stash)
 	int		j;
 	char	*line;
 
-	if (!stash || !*stash)
-		return (NULL);
 	i = 0;
+	if (!stash)
+		return (NULL);
 	while (stash[i] != '\0' && stash[i] != '\n')
 		i++;
 	if (stash[i] == '\n')
@@ -103,10 +103,15 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = ft_line(stash);
 	if (!line)
-		return (free(stash), NULL);
+		return (free (stash), NULL);
 	stash = ft_clean(stash);
 	if (!stash)
 		return (free(line), NULL);
+	if (stash && *stash == 0)
+	{
+		free(stash);
+		stash = 0;
+	}
 	return (line);
 }
 

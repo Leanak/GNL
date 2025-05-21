@@ -6,7 +6,7 @@
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:36:51 by lenakach          #+#    #+#             */
-/*   Updated: 2025/05/19 19:45:01 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:24:40 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,15 @@
 //Macro
 
 # ifndef BUFFER_SIZE
-#	define BUFFER_SIZE 10
+#  define BUFFER_SIZE 5
 # endif
 
 //Utils
-char	*ft_strjoin(char *s1, const char *s2);
+char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(const char *s1);
-char	*ft_strcpy(char *dest, const char *src);
-void	ft_putstr(char *s);
 size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
-void	*ft_calloc(size_t nmemb, size_t size);
 
 //GNL
 char	*get_next_line(int fd);

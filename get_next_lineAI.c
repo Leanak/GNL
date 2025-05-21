@@ -6,7 +6,7 @@
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:59:51 by lenakach          #+#    #+#             */
-/*   Updated: 2025/05/21 13:12:33 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:04:02 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,22 @@
 char	*ft_clean(char *stash)
 {
 	int		i;
-	int		j;
 	char	*new;
 
+	if (!stash)
+		return (NULL);
 	i = 0;
 	while (stash[i] != '\0' && stash[i] != '\n')
 		i++;
-	j = i;
-	while (stash[i])
-		i++;
-	if (j == i)
-		return (stash[0] = 0, stash);
-	new = ft_substr(stash, j + 1, i);
-	if (!new)
+	if (!stash[i])
 		return (free(stash), NULL);
+	new = ft_substr(stash, i + 1, ft_strlen(stash) - i - 1);
 	return (free(stash), new);
 }
 
 char	*ft_line(char *stash)
 {
 	int		i;
-	int		j;
 	char	*line;
 
 	if (!stash || !*stash)
@@ -45,16 +40,7 @@ char	*ft_line(char *stash)
 		i++;
 	if (stash[i] == '\n')
 		i++;
-	line = malloc((i + 1) * sizeof(char));
-	if (!line)
-		return (NULL);
-	j = 0;
-	while (j < i)
-	{
-		line[j] = stash[j];
-		j++;
-	}
-	line[i] = '\0';
+	line = ft_substr(stash, 0, i);
 	return (line);
 }
 
@@ -65,20 +51,16 @@ char	*ft_fill(int fd, char *stash)
 
 	if (!stash)
 		return (NULL);
-	res = 1;
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
-		return (free(stash), NULL);
+		return (NULL);
+	res = 1;
 	while ((ft_strchr(stash, '\n') == NULL) && res > 0)
 	{
 		res = read(fd, buffer, BUFFER_SIZE);
 		if (res < 0)
 			return (free(buffer), free(stash), NULL);
 		buffer[res] = '\0';
-		if (res == 0 && *stash)
-			return (free(buffer), stash);
-		if (res == 0)
-			return (free(buffer), free(stash), NULL);
 		stash = ft_strjoin(stash, buffer);
 		if (!stash)
 			return (free(buffer), NULL);
@@ -102,11 +84,7 @@ char	*get_next_line(int fd)
 	if (!stash)
 		return (NULL);
 	line = ft_line(stash);
-	if (!line)
-		return (free(stash), NULL);
 	stash = ft_clean(stash);
-	if (!stash)
-		return (free(line), NULL);
 	return (line);
 }
 

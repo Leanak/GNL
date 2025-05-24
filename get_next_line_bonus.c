@@ -6,7 +6,7 @@
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:59:51 by lenakach          #+#    #+#             */
-/*   Updated: 2025/05/21 17:44:42 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/05/22 12:06:47 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ char	*get_next_line(int fd)
 	return (0);
 } */
 
-int main(void)
+/* int main(void)
 {
 	int		fd1, fd2;
 	char	*line1, *line2;
@@ -189,4 +189,4 @@ int main(void)
 	close(fd1);
 	close(fd2);
 	return (0);
-}
+} */
